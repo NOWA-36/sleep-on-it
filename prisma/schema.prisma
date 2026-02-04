@@ -1,0 +1,24 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+enum ItemStatus {
+  SLEEPING
+  REVIEW
+  KEPT
+}
+
+model Item {
+  id        String     @id @default(cuid())
+  title     String
+  memo      String?
+  createdAt DateTime   @default(now())
+  status    ItemStatus @default(SLEEPING)
+  decidedAt DateTime?
+  reason    String?
+}
